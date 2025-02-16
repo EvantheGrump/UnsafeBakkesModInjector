@@ -339,6 +339,18 @@ namespace BakkesModInjector
 
         private void timer_Tick(object sender, EventArgs e)
         {
+        
+            if (!IsSafeToInject())
+            {
+                    processCheckTimer.Stop();
+                    updateCheckTimer.Interval = 10000;
+                    updateCheckTimer.Start();
+                    MessageBox.Show("Rocket League version and BakkesMod version don't match up. Please disable safe mode if you still want to inject or wait for an update.");
+                    InjectionStatus = "Mod out of date, waiting for update...\nDisable safe mode y" +
+                    "ou still want to try injection";
+                    doInjections();
+            }
+            //
             doInjections();
         }
 
